@@ -202,7 +202,7 @@ a {
 
 
 def md_to_html(md_text, title="橫縱分析報告", subtitle="橫縱分析法深度研究報告",
-               meta_line="", author="數字生命卡茲克"):
+               meta_line="", author="Jared Wang"):
     """將 Markdown 轉為帶封面的 HTML"""
 
     # 用 markdown 庫轉換正文
@@ -254,7 +254,7 @@ def main():
     parser.add_argument("input", help="輸入的 Markdown 檔案路徑")
     parser.add_argument("output", help="輸出的 PDF 檔案路徑")
     parser.add_argument("--title", default=None, help="報告標題")
-    parser.add_argument("--author", default="數字生命卡茲克", help="作者名")
+    parser.add_argument("--author", default="Jared Wang", help="作者名")
     args = parser.parse_args()
 
     with open(args.input, "r", encoding="utf-8") as f:
