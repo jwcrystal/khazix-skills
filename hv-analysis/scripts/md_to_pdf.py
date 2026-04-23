@@ -1,9 +1,9 @@
 #!/usr/bin/env python3
 """
-横纵分析法报告 Markdown → PDF 转换脚本 (WeasyPrint版)
-用法: python md_to_pdf.py input.md output.pdf [--title "报告标题"] [--author "作者"]
+橫縱分析法報告 Markdown → PDF 轉換腳本 (WeasyPrint版)
+用法: python md_to_pdf.py input.md output.pdf [--title "報告標題"] [--author "作者"]
 
-依赖: pip install weasyprint markdown --break-system-packages
+依賴: pip install weasyprint markdown --break-system-packages
 """
 
 import sys
@@ -12,7 +12,7 @@ import re
 import argparse
 import markdown
 
-# ── CSS 样式 ──
+# ── CSS 樣式 ──
 CSS_TEMPLATE = """
 @page {
     size: A4;
@@ -28,7 +28,7 @@ CSS_TEMPLATE = """
     }
 
     @bottom-center {
-        content: "第 " counter(page) " 页";
+        content: "第 " counter(page) " 頁";
         font-family: "Droid Sans Fallback", Helvetica, Arial, sans-serif;
         font-size: 8pt;
         color: #95a5a6;
@@ -80,7 +80,7 @@ body {
     border-top: 1.5pt solid #1a5276;
 }
 
-/* 一级标题 */
+/* 一級標題 */
 h1 {
     font-size: 20pt;
     color: #1a5276;
@@ -92,7 +92,7 @@ h1 {
     font-weight: bold;
 }
 
-/* 二级标题 */
+/* 二級標題 */
 h2 {
     font-size: 14pt;
     color: #1e8449;
@@ -101,7 +101,7 @@ h2 {
     font-weight: bold;
 }
 
-/* 三级标题 */
+/* 三級標題 */
 h3 {
     font-size: 12pt;
     color: #2e86c1;
@@ -126,7 +126,7 @@ p {
     widows: 3;
 }
 
-/* 引用块 */
+/* 引用塊 */
 blockquote {
     margin: 4mm 0;
     padding: 4mm 4mm 4mm 10mm;
@@ -139,13 +139,13 @@ blockquote p {
     margin: 1mm 0;
 }
 
-/* 粗体 */
+/* 粗體 */
 strong, b {
     font-weight: bold;
     color: #1a252f;
 }
 
-/* 行内代码 */
+/* 行內程式碼 */
 code {
     font-family: "Courier New", Courier, monospace;
     background: #fdf2e9;
@@ -177,7 +177,7 @@ tbody tr:nth-child(even) {
     background: #f8f9fa;
 }
 
-/* 分隔线 */
+/* 分隔線 */
 hr {
     border: none;
     border-top: 0.5pt solid #bdc3c7;
@@ -193,7 +193,7 @@ li {
     margin-bottom: 1mm;
 }
 
-/* 链接 */
+/* 連結 */
 a {
     color: #2e86c1;
     text-decoration: none;
@@ -201,29 +201,29 @@ a {
 """
 
 
-def md_to_html(md_text, title="横纵分析报告", subtitle="横纵分析法深度研究报告",
-               meta_line="", author="数字生命卡兹克"):
-    """将 Markdown 转为带封面的 HTML"""
+def md_to_html(md_text, title="橫縱分析報告", subtitle="橫縱分析法深度研究報告",
+               meta_line="", author="數字生命卡茲克"):
+    """將 Markdown 轉為帶封面的 HTML"""
 
-    # 用 markdown 库转换正文
+    # 用 markdown 庫轉換正文
     html_body = markdown.markdown(
         md_text,
         extensions=['tables', 'fenced_code', 'nl2br'],
         output_format='html5'
     )
 
-    # 移除正文中的第一个 h1（会用在封面上）
+    # 移除正文中的第一個 h1（會用在封面上）
     first_h1_match = re.search(r'<h1>(.*?)</h1>', html_body)
     if first_h1_match:
         extracted_title = first_h1_match.group(1)
-        if not title or title == "横纵分析报告":
+        if not title or title == "橫縱分析報告":
             title = extracted_title
         html_body = html_body.replace(first_h1_match.group(0), '', 1)
 
-    # 替换 CSS 中的页眉占位符
-    css = CSS_TEMPLATE.replace("HEADER_TEXT", f"{title}  |  横纵分析法深度研究报告")
+    # 替換 CSS 中的頁首佔位符
+    css = CSS_TEMPLATE.replace("HEADER_TEXT", f"{title}  |  橫縱分析法深度研究報告")
 
-    # 构建封面
+    # 構建封面
     cover_html = f"""
     <div class="cover">
         <h1 style="page-break-before: avoid; border: none;">{title}</h1>
@@ -235,7 +235,7 @@ def md_to_html(md_text, title="横纵分析报告", subtitle="横纵分析法深
     """
 
     full_html = f"""<!DOCTYPE html>
-<html lang="zh-CN">
+<html lang="zh-Hant">
 <head>
     <meta charset="UTF-8">
     <style>{css}</style>
@@ -250,33 +250,33 @@ def md_to_html(md_text, title="横纵分析报告", subtitle="横纵分析法深
 
 
 def main():
-    parser = argparse.ArgumentParser(description="横纵分析法报告 Markdown → PDF")
-    parser.add_argument("input", help="输入的 Markdown 文件路径")
-    parser.add_argument("output", help="输出的 PDF 文件路径")
-    parser.add_argument("--title", default=None, help="报告标题")
-    parser.add_argument("--author", default="数字生命卡兹克", help="作者名")
+    parser = argparse.ArgumentParser(description="橫縱分析法報告 Markdown → PDF")
+    parser.add_argument("input", help="輸入的 Markdown 檔案路徑")
+    parser.add_argument("output", help="輸出的 PDF 檔案路徑")
+    parser.add_argument("--title", default=None, help="報告標題")
+    parser.add_argument("--author", default="數字生命卡茲克", help="作者名")
     args = parser.parse_args()
 
     with open(args.input, "r", encoding="utf-8") as f:
         md_text = f.read()
 
-    # 提取元信息
+    # 提取元資訊
     meta_line = ""
     for line in md_text.split("\n"):
         stripped = line.strip().lstrip(">").strip()
-        if "研究时间" in stripped or "所属领域" in stripped or "研究对象类型" in stripped:
+        if "研究時間" in stripped or "所屬領域" in stripped or "研究對象類型" in stripped:
             meta_line = stripped
             break
 
-    html = md_to_html(md_text, title=args.title or "横纵分析报告", meta_line=meta_line, author=args.author)
+    html = md_to_html(md_text, title=args.title or "橫縱分析報告", meta_line=meta_line, author=args.author)
 
-    # 保存中间 HTML（便于调试）
+    # 儲存中間 HTML（便於除錯）
     html_path = args.output.replace('.pdf', '.html')
     with open(html_path, 'w', encoding='utf-8') as f:
         f.write(html)
     print(f"[OK] HTML 已生成: {html_path}")
 
-    # 转 PDF
+    # 轉 PDF
     from weasyprint import HTML
     HTML(string=html).write_pdf(args.output)
     size_kb = os.path.getsize(args.output) / 1024
