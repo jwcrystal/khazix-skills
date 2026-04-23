@@ -2,12 +2,12 @@
 
 ## Goal
 
-Convert this repository from a Khazix-branded public distribution into a neutral, personal-use skill repository with reusable methodology, no embedded persona branding in skill bodies, and explicit migration notes where names change.
+Convert this repository from a branded public distribution into a neutral, personal-use skill repository with reusable methodology, no embedded persona branding in skill bodies, and explicit migration notes where names change, while keeping the repository name unchanged.
 
 ## Success Criteria
 
 - Remove `Khazix` / `數字生命卡茲克` / `KKKKhazix` branding from skill bodies, prompts, and repository-facing docs unless kept in a short attribution note.
-- Rename repo-facing and skill-facing names so the resulting repository is suitable for personal/private use rather than a mirror of someone else's brand.
+- Rename skill-facing names and human-facing labels so the resulting repository is suitable for personal/private use rather than a mirror of someone else's brand.
 - Preserve the useful methodology and technical behavior of the skills.
 - Keep a minimal migration note so renamed skills and paths remain understandable.
 - Avoid unrelated refactors.
@@ -20,11 +20,11 @@ Convert this repository from a Khazix-branded public distribution into a neutral
 - `CLAUDE.md`
 - `hv-analysis/SKILL.md`
 - `hv-analysis/scripts/md_to_pdf.py`
-- `khazix-writer/SKILL.md`
-- `khazix-writer/references/content_methodology.md`
-- `khazix-writer/references/style_examples.md`
+- `longform-writer/SKILL.md`
+- `longform-writer/references/content_methodology.md`
+- `longform-writer/references/style_examples.md`
 - `prompts/橫縱分析法.md`
-- Any repo paths, titles, labels, and usage text directly tied to Khazix branding
+- Any repo paths, titles, labels, and usage text directly tied to persona branding
 
 ### Out of Scope
 
@@ -37,7 +37,7 @@ Convert this repository from a Khazix-branded public distribution into a neutral
 Use a full depersonalization pass with renaming and a small compatibility note:
 
 1. Replace brand-bound prose with neutral, method-focused language.
-2. Rename human-facing and technical names that still carry the Khazix brand.
+2. Rename human-facing and technical names that still carry the old brand.
 3. Keep one concise attribution/migration section in `README.md` only.
 4. Preserve skill triggers, structure, and technical behavior unless branding is part of the behavior.
 
@@ -45,13 +45,12 @@ Use a full depersonalization pass with renaming and a small compatibility note:
 
 ### Repository
 
-- Replace the repository title and descriptive copy with a neutral personal-use description.
-- Remove Khazix account, workspace, and publishing identity from repo docs.
-- If the repository name itself is documented in files, update it to the new neutral name.
+- Keep the repository name as-is, but replace descriptive copy with neutral personal-use wording.
+- Remove account, workspace, and publishing identity from repo docs.
 
 ### Skills
 
-- `khazix-writer/` should be renamed to a neutral skill name.
+- `longform-writer/` is the neutral replacement for the former `khazix-writer/` skill.
 - The skill frontmatter `name`, title, examples, and references should use the new neutral naming.
 - `hv-analysis/` may keep its methodology-oriented name because it describes the framework rather than the persona, but its body text should remove author-persona framing.
 
@@ -64,39 +63,35 @@ Use a full depersonalization pass with renaming and a small compatibility note:
 
 ### README.md
 
-- Change the top-level branding and repository description.
-- Update any skill table entries that still describe skills as Khazix-specific.
-- Add a short attribution/migration section, for example:
-  - some materials were adapted from Khazix-branded public versions
-  - this repository now uses neutral naming and local workflow conventions
-- Update installation/use text to the new repository identity.
+- Change the descriptive copy while keeping the repo name unchanged.
+- Update any skill table entries that still describe skills as persona-specific.
+- Add a short attribution/migration section.
+- Keep installation/use text generic rather than tied to a branded account identity.
 
 ### CLAUDE.md
 
-- Remove mirror/publishing instructions tied to `KKKKhazix/khazix-skills`, ClawHub account identity, and Tessl workspace identity.
+- Remove mirror/publishing instructions tied to account and platform identity.
 - Reframe it as a local repository guidance file.
 - Preserve only instructions still useful for maintaining this repo.
 
 ### hv-analysis/SKILL.md
 
 - Keep the framework and process.
-- Remove lines that frame the method as belonging to Khazix.
-- Replace style guidance such as “卡茲克的可讀性” with neutral descriptions like “高可讀性、敘事性、非學術腔研究寫法”.
+- Remove lines that frame the method as belonging to a specific persona.
+- Replace style guidance such as persona readability references with neutral descriptions like「高可讀性、敘事性、非學術腔研究寫法」.
 - Remove author-name examples from command snippets.
 
 ### hv-analysis/scripts/md_to_pdf.py
 
-- Change the default author from `數字生命卡茲克` to a neutral default such as `作者未指定` or an empty value.
+- Change the default author from `數字生命卡茲克` to a neutral default such as `作者未指定`.
 - Keep CLI override support unchanged.
 
-### khazix-writer Skill Family
+### longform-writer Skill Family
 
 - Rename the folder and skill name to a neutral equivalent.
-- Rewrite the skill description so it targets long-form article generation in a specified authorial style rather than “Khazix style”.
+- Rewrite the skill description so it targets long-form article generation in a specified authorial style rather than persona imitation.
 - Rewrite reference materials to describe reusable style dimensions instead of persona worship or identity-specific imitation.
-- For examples that are too identity-specific, either:
-  - rewrite them into neutral examples preserving the writing principle, or
-  - replace them with distilled rules if the concrete example is inseparable from the persona.
+- For examples that are too identity-specific, either rewrite them into neutral examples preserving the writing principle, or replace them with distilled rules.
 
 ### prompts/橫縱分析法.md
 
@@ -108,7 +103,7 @@ Use a full depersonalization pass with renaming and a small compatibility note:
 
 `README.md` should include a small section covering:
 
-- old skill/repo names → new names
+- old skill name → new name
 - note that branding was removed for personal-use neutrality
 - where attribution is retained
 
@@ -142,17 +137,14 @@ Mitigation:
 
 ## Implementation Order
 
-1. Finalize the new neutral repo name and the new replacement for `khazix-writer`.
+1. Keep the repo name unchanged and use `longform-writer` as the replacement for `khazix-writer`.
 2. Update repo docs (`README.md`, `CLAUDE.md`).
 3. Update `hv-analysis` body text and script defaults.
-4. Rename and rewrite the `khazix-writer` skill and references.
+4. Rewrite the `longform-writer` skill and references.
 5. Update prompt text.
 6. Run final repo-wide search for leftover branding.
 
-## Open Decision
+## Finalized Naming Decision
 
-Before implementation, one naming choice still needs to be made explicit:
-
-- what neutral replacement should be used for the current `khazix-writer` skill and, if applicable, the repository name itself.
-
-Once that naming is chosen, implementation can proceed directly.
+- keep the repository name unchanged
+- rename `khazix-writer` to `longform-writer`
